@@ -13,9 +13,7 @@ Environment="HOME=/root"
 ExecStartPre=-/usr/bin/docker stop helloworld
 ExecStartPre=-/usr/bin/docker rm helloworld
 
-ExecStart=/usr/bin/docker run \
-        rogierlommers/helloworld:latest -- \
-        --name helloworld
+ExecStart=/usr/bin/docker run --name helloworld rogierlommers/helloworld:latest
 
 ExecStop=-/usr/bin/docker stop helloworld
 
