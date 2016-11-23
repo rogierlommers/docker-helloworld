@@ -1,0 +1,23 @@
+[Unit]
+Description=Daemon for helloworld
+After=docker.service
+Wants=
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+StartLimitInterval=20
+StartLimitBurst=5
+TimeoutStartSec=0
+Environment="HOME=/root"
+ExecStartPre=-/usr/bin/docker stop helloworld
+ExecStartPre=-/usr/bin/docker rm helloworld
+
+ExecStart=/usr/bin/docker run \
+        rogierlommers/helloworld:latest -- \
+        --name helloworld
+
+ExecStop=-/usr/bin/docker stop helloworld
+
+[Install]
+WantedBy=multi-user.target
